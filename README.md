@@ -1,6 +1,6 @@
-# pywinutil
+# pyosutil
 
-Windows utility CLI. Called from any terminal as `pywinutil`.
+Utility CLI for filesystems and drives. Called from any terminal as `pyosutil`.
 
 Currently provides a `copy` command that copies files/folders between drives
 (any drives or locations) with resume support for interrupted copies.
@@ -33,16 +33,16 @@ If `python --version` shows nothing or errors, install Python first:
 
 Clone the repository and install it:
 
-    git clone https://github.com/eemberda/pywinutils.git
-    cd pywinutils
+    git clone https://github.com/eemberda/pyosutils.git
+    cd pyosutils
     pip install -e .
 
-This registers the `pywinutil` command globally (via Python's `Scripts`
-directory, which is on PATH). Open a **new** terminal and verify it works:
+This registers the `pyosutil` command globally (via Python's `Scripts`
+directory, which is on PATH). Reopen the terminal and verify it works:
 
-    pywinutil --help
+    pyosutil --help
 
-> If `pywinutil` is not recognized, your Python `Scripts` directory may not be
+> If `pyosutil` is not recognized, your Python `Scripts` directory may not be
 > on PATH. Find it with `python -c "import sys; print(sys.prefix + '\\Scripts')"`
 > and add it to your PATH, then reopen the terminal.
 
@@ -50,23 +50,23 @@ directory, which is on PATH). Open a **new** terminal and verify it works:
 
 If you don't want to install the package, you can still call it globally:
 
-1. Clone or copy this folder (must keep `pywinutil.py` and `pywinutil.cmd` together).
+1. Clone or copy this folder (must keep `pyosutil.py` and `pyosutil.cmd` together).
 2. Add this folder to your PATH (Environment Variables > Path).
-3. Reopen the terminal and run `pywinutil` as usual.
+3. Reopen the terminal and run `pyosutil` as usual.
 
 ## Usage
 
 Copy a folder from one drive to another (destination parent folder):
 
-    pywinutil copy D:\data\docs E:\backup
+    pyosutil copy D:\data\docs E:\backup
 
 Copy a folder's contents directly into the destination (no subfolder):
 
-    pywinutil copy D:\data\docs E:\backup --no-folder
+    pyosutil copy D:\data\docs E:\backup --no-folder
 
 Copy a single file to a specific destination file:
 
-    pywinutil copy D:\data\docs\report.xlsx E:\backup\report.xlsx
+    pyosutil copy D:\data\docs\report.xlsx E:\backup\report.xlsx
 
 ### Resume (--continue)
 
@@ -74,14 +74,14 @@ If a copy is interrupted (disk unplugged, disconnect, crash), re-run with
 `--continue` to resume. Files already fully copied are skipped; only missing
 or incomplete files are copied again.
 
-    pywinutil copy D:\data\docs E:\backup --continue
+    pyosutil copy D:\data\docs E:\backup --continue
 
-State is stored in `pywinutil_copy_state.json`. Use `--state <dir>` to choose
+State is stored in `pyosutil_copy_state.json`. Use `--state <dir>` to choose
 where the state file lives (default: current directory):
 
-    pywinutil copy D:\data\docs E:\backup --continue --state E:\backup\.pywinutil
+    pyosutil copy D:\data\docs E:\backup --continue --state E:\backup\.pyosutil
 
 > Note: within a single large file, copy resumes per-file only. A file that
 > was still mid-copy when interrupted is re-copied from scratch.
 
-Run `pywinutil copy --help` for all options.
+Run `pyosutil copy --help` for all options.

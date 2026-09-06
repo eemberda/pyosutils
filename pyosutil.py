@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""pywinutil - Windows utility CLI.
+"""pyosutil - utility CLI for filesystems and drives.
 
 Currently provides:
   copy  - copy files/folders across drives with resume support.
@@ -14,7 +14,7 @@ import time
 from pathlib import Path
 
 
-STATE_FILE = "pywinutil_copy_state.json"
+STATE_FILE = "pyosutil_copy_state.json"
 CHUNK_BUF_SIZE = 1024 * 1024  # 1 MiB
 
 
@@ -164,8 +164,8 @@ def copy_command(args):
 
 def build_parser():
     parser = argparse.ArgumentParser(
-        prog="pywinutil",
-        description="Windows utility toolkit (copy files/folders across drives with resume).",
+        prog="pyosutil",
+        description="Utility toolkit (copy files/folders across drives with resume).",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
