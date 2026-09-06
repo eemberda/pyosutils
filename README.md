@@ -2,18 +2,57 @@
 
 Windows utility CLI. Called from any terminal as `pywinutil`.
 
-## Install
+Currently provides a `copy` command that copies files/folders between drives
+(any drives or locations) with resume support for interrupted copies.
 
-Make it callable globally from any terminal:
+## Requirements
 
+- **Python 3.9+** on Windows (works on other OSes too)
+  - Check: `python --version`
+- **pip** (bundled with Python)
+  - Check: `pip --version`
+- **Git** (only needed to clone the repository, optional)
+
+No third-party Python packages are required — the tool uses only the standard
+library.
+
+### Installing Python (if not already installed)
+
+If `python --version` shows nothing or errors, install Python first:
+
+1. Download the installer from <https://www.python.org/downloads/>.
+2. Run the installer and **check the box `Add python.exe to PATH`** before
+   clicking Install.
+3. Reopen your terminal so the new PATH takes effect.
+4. Verify: `python --version` and `pip --version`.
+
+> On Windows your package manager can also install Python, e.g.
+> `winget install Python.Python.3.12`. Any version 3.9+ works.
+
+## Getting Started
+
+Clone the repository and install it:
+
+    git clone https://github.com/eemberda/pywinutils.git
+    cd pywinutils
     pip install -e .
 
-This registers the `pywinutil` command (via the Python `Scripts` directory, which is on PATH).
+This registers the `pywinutil` command globally (via Python's `Scripts`
+directory, which is on PATH). Open a **new** terminal and verify it works:
 
-Alternatively, without installing, add this folder to your PATH and use the
-`pywinutil.cmd` wrapper:
+    pywinutil --help
 
-    pywinutil.cmd copy C:\data\docs D:\backup
+> If `pywinutil` is not recognized, your Python `Scripts` directory may not be
+> on PATH. Find it with `python -c "import sys; print(sys.prefix + '\\Scripts')"`
+> and add it to your PATH, then reopen the terminal.
+
+### Alternative install (no pip install)
+
+If you don't want to install the package, you can still call it globally:
+
+1. Clone or copy this folder (must keep `pywinutil.py` and `pywinutil.cmd` together).
+2. Add this folder to your PATH (Environment Variables > Path).
+3. Reopen the terminal and run `pywinutil` as usual.
 
 ## Usage
 
@@ -33,7 +72,7 @@ Copy a single file to a specific destination file:
 
 If a copy is interrupted (disk unplugged, disconnect, crash), re-run with
 `--continue` to resume. Files already fully copied are skipped; only missing
-files are copied again.
+or incomplete files are copied again.
 
     pywinutil copy D:\data\docs E:\backup --continue
 
